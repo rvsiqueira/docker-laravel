@@ -1,3 +1,8 @@
+
+# Docker Hub Laravel Image
+https://hub.docker.com/repository/docker/rvsiqueira/php-laravel/ 
+
+
 1. Build image based on the dockerfile
 docker build -t rvsiqueira/php-laravel .
 
