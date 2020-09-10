@@ -8,3 +8,9 @@ docker run -d --name laravel -v $(pwd):/var/www -p 8000:8000 rvsiqueira/php-lara
 docker exec -ti laravel bash
 cd /var/www/
 php artisan serve --host=0.0.0.0
+
+4. Configure Laravel
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan config:cache
