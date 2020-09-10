@@ -11,6 +11,7 @@ services:
             - app-network
         depends_on: 
             - mysql
+            - redis
 
     nginx:
         build: .docker/nginx
@@ -23,6 +24,8 @@ services:
             - .:/var/www
         networks: 
             - app-network
+        depends_on: 
+            - app
 
     mysql:
         image: mysql:5.7
@@ -40,17 +43,11 @@ services:
             - app-network  
         volumes: 
             - ./.docker/dbdata:/var/lib/mysql
-        healthcheck:
-            test: ["CMD-SHELL", 'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;" --skip-column-names -8']
-            interval: 10s
-            timeout: 10s
-            retries: 4
-
 
     redis:
         image: redis:alpine
         expose:
-            - 6379
+            - 6379s
         networks: 
             - app-network
 
