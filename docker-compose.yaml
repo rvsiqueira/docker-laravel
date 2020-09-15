@@ -17,7 +17,7 @@ services:
             - DB_HOST=db
             - DB_DATABASE=laravel
             - DB_USERNAME=root       
-            - DB_PASSWORD=root  
+            - DB_PASSWORD=root   
 
     nginx:
         build: .docker/nginx
@@ -32,6 +32,9 @@ services:
             - app-network
         depends_on: 
             - app
+        environment: 
+            - APP_HOST=app       
+            - APP_PORT=9000  
 
     mysql:
         image: mysql:5.7
