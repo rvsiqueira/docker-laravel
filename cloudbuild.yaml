@@ -7,3 +7,24 @@ steps:
 - id: "Rodando docker ps"
   name: 'gcr.io/cloud-builders/docker'
   args: ['ps']
+
+- id: "Instalando composer"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','composer','install']
+
+- id: "Copiando .env"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','cp','.env','.env.example']
+
+- id: "Rodando Key:Generate"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','key:generate']
+
+- id: "Rodando Migration"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/artisan','migrate']
+
+- id: "Rodando Migration"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec','-t','app','php','/var/www/vendor/bin/phpunit','/var/www/phpunit.xml']
+
